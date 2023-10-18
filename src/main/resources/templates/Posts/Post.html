@@ -5,40 +5,40 @@
     <meta charset="UTF-8">
     <title>Clicked Post</title>
 
-    <link rel="stylesheet" type="text/css" th:href="@{/css/Post/Post.css}" />
+    <link rel="stylesheet" type="text/css" href="/Post/Post.css" />
 
 </head>
 
 <body>
-    <div class="container centered-container blog-box">
-        <div class="container">
-            <header>
-                <h1 class="title" th:text="${inputPost.title}"></h1>
-            </header>
+    <header>
+        <h1>My Blog Application</h1>
+        <nav>
+            <div class="nav-options">
+                <button> Search </button>
+                <a> <h2> Login </h2></a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h1 th:text="${inputPost.title}"></h1>
+        <div class="post-info">
 
-            <main>
-                <p class="content" th:utext="${inputPost.content}"></p>
-            </main>
-            <footer>
-                <h2 class="author-name" th:text="${inputPost.author}"></h2>
-                <h3>Published at : </h3>
-                <h3 class="time-stamp" th:text="${#dates.format(inputPost.published_at, 'MMMM d, yyyy')}"></h3>
-                <ul class="tags">
-                    <li>Harry Potter</li>
-                    <li>Hogwarts</li>
-                    <li>Wizarding World</li>
-                    <li>Magic</li>
-                    <li>J.K. Rowling</li>
-                </ul>
-
-                <div class="operationsSection">
-                    <a th:href="@{'/comment/' + ${inputPost.id}}"><button type="button" class="btn btn-primary">Comment</button></a>
-                    <a th:href="@{'/deletePost/' + ${inputPost.id}}"><button type="button" class="btn btn-primary">Delete</button></a>
-                    <a th:href="@{'/updatePost/' + ${inputPost.id}}"><button type="button" class="btn btn-primary">Update</button></a>
-                </div>
-            </footer>
+            <p th:text="${inputPost.author}"></p>
+            <p th:text="${inputPost.published_at}"></p>
         </div>
-    </div>
+
+        <div class="post-content" >
+            <p th:text="${inputPost.content}"></p>
+        </div>
+
+    </main>
+
+    <footer>
+        <a th:href="@{'/comment/' + ${inputPost.id}}"><button>Comment</button></a>
+        <a th:href="@{'/deletePost/' + ${inputPost.id}}"><button>Delete</button></a>
+        <a th:href="@{'/updatePost/' + ${inputPost.id}}"><button>Update</button></a>
+    </footer>
+
 
 </body>
 

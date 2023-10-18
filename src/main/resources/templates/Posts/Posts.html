@@ -24,7 +24,7 @@
 
     <main>
             <th:block th:each="post : ${posts}">
-                <div class="post">
+                <div class="post" >
                     <div class="title">
                         <h5 th:text="${post.title}"></h5>
                     </div>
@@ -36,51 +36,7 @@
                     <div class="post-excerpt">
                         <p  th:text="${post.excerpt}"></p>
                     </div>
-                </div>
-            </th:block>
-            <th:block th:each="post : ${posts}">
-                <div class="post">
-                    <div class="title">
-                        <h5 th:text="${post.title}"></h5>
-                    </div>
-                    <div class="author-info">
-                        <p  th:text="${post.author}"></p>
-                        &nbsp;
-                        <p th:text="${'Published At: ' + #dates.format(post.published_at, 'yyyy-MM-dd HH:mm')}"></p>
-                    </div>
-                    <div class="post-excerpt">
-                        <p  th:text="${post.excerpt}"></p>
-                    </div>
-                </div>
-            </th:block>
-            <th:block th:each="post : ${posts}">
-                <div class="post">
-                    <div class="title">
-                        <h5 th:text="${post.title}"></h5>
-                    </div>
-                    <div class="author-info">
-                        <p  th:text="${post.author}"></p>
-                        &nbsp;
-                        <p th:text="${'Published At: ' + #dates.format(post.published_at, 'yyyy-MM-dd HH:mm')}"></p>
-                    </div>
-                    <div class="post-excerpt">
-                        <p  th:text="${post.excerpt}"></p>
-                    </div>
-                </div>
-            </th:block>
-            <th:block th:each="post : ${posts}">
-                <div class="post">
-                    <div class="title">
-                        <h5 th:text="${post.title}"></h5>
-                    </div>
-                    <div class="author-info">
-                        <p  th:text="${post.author}"></p>
-                        &nbsp;
-                        <p th:text="${'Published At: ' + #dates.format(post.published_at, 'yyyy-MM-dd HH:mm')}"></p>
-                    </div>
-                    <div class="post-excerpt">
-                        <p  th:text="${post.excerpt}"></p>
-                    </div>
+                    <a th:href="@{'/posts/' + ${post.id}}"> Read More </a>
                 </div>
             </th:block>
 

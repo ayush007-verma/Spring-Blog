@@ -58,6 +58,8 @@ input {
 }
 
 
+/***********************************************************************/
+
 
 main {
     display: flex;
@@ -69,7 +71,7 @@ main {
 }
 
 .post {
-    height: 30vh;
+    height: 40vh;
     width: 30%;
     max-width: 30%;
     margin: 1%;
@@ -96,6 +98,8 @@ main {
     font-size: 1rem;
 }
 
+/******************************************************************************/
+
 footer{
     display : flex;
     justify-content: space-between;
@@ -117,8 +121,22 @@ footer > a {
 }
 
 
-a:hover, button:hover, input:hover, .post:hover{
+a:hover, button:hover, input:hover, .post:hover ,.post > a, .post>a:hover {
     cursor : pointer;
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
     border-width: 2px;
+}
+
+.post > a{
+    text-decoration: none;
+    color : black;
+
+    display: flex;
+    height : 6vh;
+    width : 10vw;
+    font-family : sans-serif;
+    font-size: 1rem;
+    border : 1px solid black;
+    justify-content: center;
+    align-items: center;
 }
