@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Comment</title>
+
+    <link rel="stylesheet" href="/Comments/UpdateComment.css">
+</head>
+<body>
+<header>
+  <h1>My Blog Application</h1>
+  <div class="nav-link">
+    <a th:href="@{'/posts'}"><button id="nav-link">Click to View Blogs....</button></a>
+  </div>
+  <nav>
+    <div class="nav-options">
+      <button> Search </button>
+      <a> <h2> Login </h2></a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <h1> Update existing Comment</h1>
+  <form action="#" th:action="@{'/posts/'+ ${clickedPostId} + '/comments/update/' + ${commentId} }" th:object="${retreivedComment}" method="POST">
+    <div>
+      <input type="text" th:field="*{name}" th:value="${retreivedComment.name}"  required/>
+    </div>
+    <div>
+      <input type="text" th:field="*{email}" th:value="${retreivedComment.email}"  required/>
+    </div>
+
+    <div>
+      <textarea th:field="*{comment}" rows="5" th:value="${retreivedComment.comment}"  required></textarea>
+    </div>
+
+    <button type="submit" >Update Comment</button>
+  </form>
+</main>
+</body>
+</html>

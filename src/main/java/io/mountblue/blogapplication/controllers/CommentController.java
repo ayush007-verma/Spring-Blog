@@ -2,6 +2,7 @@ package io.mountblue.blogapplication.controllers;
 
 
 import io.mountblue.blogapplication.entities.Comment;
+import io.mountblue.blogapplication.entities.Post;
 import io.mountblue.blogapplication.repositories.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class CommentController {
@@ -67,6 +69,49 @@ public class CommentController {
 //        return "redirect:/posts/";
     }
 
+    @GetMapping("/posts/{postId}/comments/update/{commentId}")
+    public String updateCommentById(@PathVariable("commentId") Long commentId, @PathVariable("postId") Long clickedPostId, Model model) {
+
+        Optional<Comment> retrievedCommentById = commentRepository.findById(commentId);
+
+        if (retrievedCommentById.isPresent()) {
+            Comment retreivedComment = retrievedCommentById.get();
+            model.addAttribute("retreivedComment", retreivedComment);
+            model.addAttribute("clickedPostId", clickedPostId);
+            System.out.println("retreivedComment :- ");
+            System.out.println(retreivedComment.getId());
+            System.out.println(retreivedComment.getName());
+            System.out.println(retreivedComment.getComment());
+        }
+
+        return "Comments/UpdateComment";
+    }
+
+
+    @PostMapping("/posts/{postId}/comments/update/{commentId}")
+    public String processUpdateComment(@PathVariable("postId") Long postId, @PathVariable("commentId") Long commentId,@ModelAttribute("retreivedComment") Comment retreivedComment, Model model) {
+        retreivedComment.setPost_id(postId);
+        retreivedComment.setId(commentId);
+        commentRepository.save(retreivedComment);
+        System.out.println("*********************");
+        System.out.println("updated  post :- ");
+        System.out.println(retreivedComment.getId());
+        System.out.println(retreivedComment.getName());
+        System.out.println(retreivedComment.getComment());
+        System.out.println(retreivedComment.getPost_id());
+        System.out.println("$$$$$$$$$$$$$$$$$$$$");
+
+
+        return "redirect:/posts/" + postId + "/comments";
+    }
+    // delete a post by id
+    @GetMapping("/posts/{postId}/comments/delete/{commentId}")
+    public String deletePostById(@PathVariable("commentId") Long Id) {
+
+        commentRepository.deleteById(Id);
+
+        return "redirect:/posts";
+    }
 
 
 
