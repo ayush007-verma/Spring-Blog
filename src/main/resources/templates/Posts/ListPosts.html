@@ -23,7 +23,7 @@
                                 <p class="card-text" th:text="${post.excerpt}"></p>
                                 <p class="card-text"><small class="text-muted" th:text="${post.author}"></small></p>
                                 <p class="card-text"><small class="text-muted" th:text="${'Published At: ' + #dates.format(post.published_at, 'yyyy-MM-dd HH:mm')}"></small></p>
-                                <a th:href="@{'/getPost/' + ${post.id}}" class="btn btn-primary">Read More</a>
+                                <a th:href="@{'/posts/' + ${post.id}}" class="btn btn-primary">Read More</a>
                             </div>
                         </div>
                     </div>

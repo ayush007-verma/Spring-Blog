@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Clicked Post</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/Post/Post.css}" />
+
+</head>
+<body>
+    <div class="container centered-container blog-box">
+        <div class="container">
+            <header>
+                <h1 class="title" th:text="${inputPost.title}"></h1>
+            </header>
+
+            <main>
+                <p class="content" th:utext="${inputPost.content}"></p>
+            </main>
+            <footer>
+                <h2 class="author-name" th:text="${inputPost.author}"></h2>
+                <h3>Published at : </h3>
+                <h3 class="time-stamp" th:text="${#dates.format(inputPost.published_at, 'MMMM d, yyyy')}"></h3>
+                <ul class="tags">
+                    <li>Harry Potter</li>
+                    <li>Hogwarts</li>
+                    <li>Wizarding World</li>
+                    <li>Magic</li>
+                    <li>J.K. Rowling</li>
+                </ul>
+
+                <div class="operationsSection">
+                    <a th:href="@{'/comment/' + ${inputPost.id}}"><button type="button" class="btn btn-primary">Comment</button></a>
+                    <a th:href="@{'/deletePost/' + ${inputPost.id}}"><button type="button" class="btn btn-primary">Delete</button></a>
+                    <a th:href="@{'/updatePost/' + ${inputPost.id}}"><button type="button" class="btn btn-primary">Update</button></a>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
