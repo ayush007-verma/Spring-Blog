@@ -1,0 +1,100 @@
+ <!DOCTYPE html>
+ <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Posts</title>
+
+    <link rel="stylesheet" href="/Post/Posts.css"/>
+</head>
+<body>
+    <header>
+        <h1>My Blog Application</h1>
+        <nav>
+            <div class="nav-options">
+                <button> Search </button>
+                <a> <h2> Login </h2></a>
+            </div>
+            <div class="nav-options">
+                <button> Filter </button>
+                <button> Sort </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+            <th:block th:each="post : ${posts}">
+                <div class="post">
+                    <div class="title">
+                        <h5 th:text="${post.title}"></h5>
+                    </div>
+                    <div class="author-info">
+                        <p  th:text="${post.author}"></p>
+                        &nbsp;
+                        <p th:text="${'Published At: ' + #dates.format(post.published_at, 'yyyy-MM-dd HH:mm')}"></p>
+                    </div>
+                    <div class="post-excerpt">
+                        <p  th:text="${post.excerpt}"></p>
+                    </div>
+                </div>
+            </th:block>
+            <th:block th:each="post : ${posts}">
+                <div class="post">
+                    <div class="title">
+                        <h5 th:text="${post.title}"></h5>
+                    </div>
+                    <div class="author-info">
+                        <p  th:text="${post.author}"></p>
+                        &nbsp;
+                        <p th:text="${'Published At: ' + #dates.format(post.published_at, 'yyyy-MM-dd HH:mm')}"></p>
+                    </div>
+                    <div class="post-excerpt">
+                        <p  th:text="${post.excerpt}"></p>
+                    </div>
+                </div>
+            </th:block>
+            <th:block th:each="post : ${posts}">
+                <div class="post">
+                    <div class="title">
+                        <h5 th:text="${post.title}"></h5>
+                    </div>
+                    <div class="author-info">
+                        <p  th:text="${post.author}"></p>
+                        &nbsp;
+                        <p th:text="${'Published At: ' + #dates.format(post.published_at, 'yyyy-MM-dd HH:mm')}"></p>
+                    </div>
+                    <div class="post-excerpt">
+                        <p  th:text="${post.excerpt}"></p>
+                    </div>
+                </div>
+            </th:block>
+            <th:block th:each="post : ${posts}">
+                <div class="post">
+                    <div class="title">
+                        <h5 th:text="${post.title}"></h5>
+                    </div>
+                    <div class="author-info">
+                        <p  th:text="${post.author}"></p>
+                        &nbsp;
+                        <p th:text="${'Published At: ' + #dates.format(post.published_at, 'yyyy-MM-dd HH:mm')}"></p>
+                    </div>
+                    <div class="post-excerpt">
+                        <p  th:text="${post.excerpt}"></p>
+                    </div>
+                </div>
+            </th:block>
+
+    </main>
+
+    <footer>
+        <a><h3>< Previous</h3></a>
+
+
+
+        <a><h3>Next ></h3></a>
+    </footer>
+
+
+
+</body>
+</html>

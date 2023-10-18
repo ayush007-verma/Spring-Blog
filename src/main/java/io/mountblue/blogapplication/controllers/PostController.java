@@ -23,7 +23,7 @@ public class PostController {
         List<Post> posts = postRepository.findAll();
         model.addAttribute("posts", posts);
 
-        return "Posts/ListPosts";
+        return "Posts/Posts";
     }
 
 
