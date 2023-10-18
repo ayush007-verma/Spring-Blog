@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>update post</title>
+</head>
+<body>
+    <form th:action="@{'/posts/update/' + ${retreivedPost.id}}" th:object="${retreivedPost}" method="POST">
+        <input th:field="*{title}" th:value="${retreivedPost.title}"/>
+        <input th:field="*{excerpt}" th:value="${retreivedPost.excerpt}"/>
+        <input th:field="*{content}" th:value="${retreivedPost.content}"/>
+        <input th:field="*{author}" th:value="${retreivedPost.author}"/>
+        <input type="datetime-local" th:field="*{published_at}" required/>
+        <input type="checkbox" th:field="*{is_Published}" />
+
+        <button type="submit"> update post </button>
+    </form>
+</body>
+</html>
