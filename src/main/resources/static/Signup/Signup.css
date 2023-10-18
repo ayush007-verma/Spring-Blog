@@ -1,0 +1,60 @@
+
+body{
+    margin-top: 5%;
+}
+
+
+header, main,  footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+}
+
+
+#redirectSection{
+    font-size: 1rem;
+}
+
+a{
+    font-size: 1rem;
+    text-decoration: none;
+    color : blue;
+}
+
+input {
+    display: flex;
+    height : 5vh;
+    width : 20vw;
+    font-family : sans-serif;
+    font-size: 1rem;
+    border : 1px solid black;
+    padding-left : 10px;
+}
+
+input::placeholder{
+    color : black;
+}
+
+form {
+    display : flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+button {
+    display: flex;
+    height : 6vh;
+    width : 10vw;
+    font-family : sans-serif;
+    font-size: 1rem;
+    background: white;
+    border : 1px solid black;
+    justify-content: center;
+    align-items: center;
+}
+
+button:hover, input:hover, a:hover{
+    cursor : pointer;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+}
