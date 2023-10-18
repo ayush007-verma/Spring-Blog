@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Comments By PostId</title>
+
+    <link rel="stylesheet" href="/Comments/CommentsByPostId.css"/>
+</head>
+<body>
+    <header>
+        <h1>My Blog Application</h1>
+        <div class="nav-link">
+            <a th:href="@{'/posts/new'}"><button id="nav-link">Click to Write a new Blog....</button></a>
+        </div>
+        <nav>
+            <div class="nav-options">
+                <button> Search </button>
+                <a> <h2> Login </h2></a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="nav-link">
+        <a th:href="@{'/posts/' + ${postId} + '/comments/new'}"><button id="create-comment">Click to Write a new Comment....</button></a>
+    </div>
+
+
+    <main>
+
+
+        <th:block th:each="comment : ${commentsByPostId}">
+            <div class="comment-container">
+                <h2 th:text="${comment.name}"> </h2>
+                <div id="comment">
+                    <p th:text="${comment.comment}"></p>
+                </div>
+                <p th:text="${comment.created_at}"> </p>
+
+                <div class="ud-buttons">
+                    <a th:href="@{'/posts/' + ${postId} + '/comments/delete/' + ${comment.id}}"><button>Delete</button></a>
+                    <a th:href="@{'/posts/' + ${postId} + '/comments/update/' + ${comment.id}}"><button>Update</button></a>
+                </div>
+            </div>
+        </th:block>
+
+
+    </main>
+
+</body>
+</html>
