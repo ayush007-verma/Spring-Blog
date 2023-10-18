@@ -1,0 +1,23 @@
+
+body{
+    margin-top: 5%;
+}
+
+
+header, main,  footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+}
+
+
+#redirectSection{
+    font-size: 1rem;
+    color : red;
+}
+
+a{
+    font-size: 1rem;
+    text-decoration: none;
+}

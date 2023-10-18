@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Signup</title>
+    <link rel="stylesheet" type="text/css" href='/Signup/Signup.css' />
+
+</head>
+
+<body>
+    <header>
+        <h2> Signup </h2>
+    </header>
+    <main>
+        <form>
+
+            <input type="text" placeholder="Name"/>
+            <br/>
+            <input type="email" placeholder="Email"/>
+            <br/>
+            <input type="password" placeholder="Password"/>
+            <br/>
+            <input type="password" placeholder="Confirm Password" />
+            <br/>
+
+            <button type="submit"> Submit </button>
+
+        </form>
+    </main>
+    <footer>
+
+        <div>
+            <p>
+                Have an account
+
+                <a th:href="@{'/login'}"> Login </a>
+            </p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

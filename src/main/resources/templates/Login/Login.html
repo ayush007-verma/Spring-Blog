@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+    <link rel="stylesheet" type="text/css" href='/Login/Login.css'/>
+
+</head>
+
+<body>
+    <header>
+        <h2> Login </h2>
+    </header>
+    <main>
+        <form>
+
+            <input type="email" placeholder="Email"/>
+            <br/>
+            <input type="password" placeholder="Password"/>
+            <br/>
+
+            <button type="submit" value="submit"> Submit </button>
+
+
+        </form>
+    </main>
+    <footer>
+        <div>
+            <p id="redirectSection">
+                Don't have an account
+
+                <a th:href="@{'/signuo'}"> Create one </a>
+            </p>
+        </div>
+    </footer>
+</body>
+
+</html>
