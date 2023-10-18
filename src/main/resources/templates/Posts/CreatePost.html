@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Post</title>
+
+    <link rel="stylesheet" href="/Post/CreatePost.css"/>
+</head>
+<body>
+<div>
+    <header>
+        <h1>My Blog Application</h1>
+        <div class="nav-link">
+            <a th:href="@{'/posts'}"><button id="nav-link">Click to View Blogs....</button></a>
+        </div>
+        <nav>
+            <div class="nav-options">
+                <button> Search </button>
+                <a> <h2> Login </h2></a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h1>Create a new Blog...</h1>
+        <form action="#" th:action="@{/posts/new}" th:object="${inputPost}" method="POST">
+            <div>
+                <input type="text" th:field="*{title}" placeholder="Title" required/>
+            </div>
+            <div>
+                <input type="text" th:field="*{excerpt}" placeholder="Excerpt" required/>
+            </div>
+            <div>
+                <input type="text" th:field="*{author}" placeholder="Author"  required/>
+            </div>
+            <div>
+                <textarea th:field="*{content}" rows="5" placeholder="Content" required></textarea>
+            </div>
+            <div>
+                <input type="datetime-local" th:field="*{published_at}" placeholder="Published_at" required/>
+            </div>
+            <div id="is-published-section">
+                <input type="checkbox" th:field="*{is_Published}" id="published">
+                <label >Is Published ?</label>
+            </div>
+            <button type="submit" >Create Post</button>
+        </form>
+    </main>
+
+</div>
+
+</body>
+</html>

@@ -82,7 +82,7 @@ public class PostController {
         return "redirect:/posts";
     }
 
-
+    // delete a post by id
     @GetMapping("/posts/delete/{Id}")
     public String deletePostById(@PathVariable("Id") Long Id) {
 
@@ -90,6 +90,23 @@ public class PostController {
 
         return "redirect:/posts";
     }
+
+    // create a post ...
+
+    @GetMapping("/posts/new")
+    public String createPost(Model model) {
+        model.addAttribute("inputPost", new Post());
+        return "Posts/CreatePost";
+    }
+
+    @PostMapping("/posts/new")
+    public String processCreatePost(@ModelAttribute("inputPost") Post inputPost, Model model) {
+
+        postRepository.save(inputPost);
+
+        return "redirect:/posts";
+    }
+
 
 
 
