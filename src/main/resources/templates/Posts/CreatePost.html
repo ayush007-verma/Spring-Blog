@@ -36,6 +36,13 @@
                 <textarea th:field="*{content}" rows="5" placeholder="Content" required></textarea>
             </div>
             <div>
+                <input type="text" id="tag">
+                <button type="button" onclick="addTag(event)">Add Tag</button>
+                <ul id="tagList"></ul>
+                <input type="hidden" id="inputTags" th:value="${inputTags}" name="inputTags">
+
+            </div>
+            <div>
                 <input type="datetime-local" th:field="*{published_at}" placeholder="Published_at" required/>
             </div>
             <div id="is-published-section">
@@ -46,6 +53,7 @@
         </form>
     </main>
 
+    <script src="/js/Tags/AddTags.js"></script>
 </div>
 
 </body>

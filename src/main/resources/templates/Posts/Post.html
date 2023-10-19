@@ -31,6 +31,14 @@
             <p th:text="${inputPost.content}"></p>
         </div>
 
+        <div class="post-tags">
+            <th:block th:each="tag : ${tags}">
+                <div class="title">
+                    <h5 th:text="${tag.name}"></h5>
+                </div>
+            </th:block>
+        </div>
+
     </main>
 
     <footer>

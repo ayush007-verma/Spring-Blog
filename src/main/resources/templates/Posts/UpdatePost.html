@@ -4,17 +4,90 @@
 <head>
     <meta charset="UTF-8">
     <title>update post</title>
+    <link rel="stylesheet" href="/Tags/UpdateTags.css">
 </head>
 <body>
-    <form th:action="@{'/posts/update/' + ${retreivedPost.id}}" th:object="${retreivedPost}" method="POST">
-        <input th:field="*{title}" th:value="${retreivedPost.title}"/>
-        <input th:field="*{excerpt}" th:value="${retreivedPost.excerpt}"/>
-        <input th:field="*{content}" th:value="${retreivedPost.content}"/>
-        <input th:field="*{author}" th:value="${retreivedPost.author}"/>
-        <input type="datetime-local" th:field="*{published_at}" required/>
-        <input type="checkbox" th:field="*{is_Published}" />
+<!--    <form th:action="@{'/posts/update/' + ${retreivedPost.id}}" th:object="${retreivedPost}" method="POST">-->
+<!--        <input th:field="*{title}" th:value="${retreivedPost.title}"/>-->
+<!--        <input th:field="*{excerpt}" th:value="${retreivedPost.excerpt}"/>-->
+<!--        <input th:field="*{content}" th:value="${retreivedPost.content}"/>-->
+<!--        <input th:field="*{author}" th:value="${retreivedPost.author}"/>-->
+<!--        <input type="datetime-local" th:field="*{published_at}" required/>-->
+<!--        <input type="checkbox" th:field="*{is_Published}" />-->
 
-        <button type="submit"> update post </button>
-    </form>
+<!--        <button type="submit"> update post </button>-->
+<!--    </form>-->
+
+
+    <main>
+        <h1>Edit the Blog...</h1>
+        <form action="#" th:action="@{'/posts/update/' + ${retreivedPost.id}}" th:object="${retreivedPost}" method="POST">
+            <div>
+                <input type="text" th:field="*{title}" th:value="${retreivedPost.title}" placeholder="Title" required/>
+            </div>
+            <div>
+                <input type="text" th:field="*{excerpt}" th:value="${retreivedPost.excerpt}" placeholder="Excerpt" required/>
+            </div>
+            <div>
+                <input type="text" th:field="*{author}" th:value="${retreivedPost.author}" placeholder="Author"  required/>
+            </div>
+            <div>
+                <textarea th:field="*{content}" rows="5" th:value="${retreivedPost.content}" placeholder="Content" required></textarea>
+            </div>
+
+
+            <!-- Existing Tags -->
+            <h3>Existing Tags:</h3>
+            <ul id="existingTags">
+                <!-- Iterate through the list of existing tags -->
+                <th:block th:each="tag : ${inputTags}">
+                    <li>
+                        <span th:text="${tag.name}"></span>
+                        <!-- Buttons for update and delete -->
+                        <button type="button" onclick="updateTag(event)">Update</button>
+                        <button type="button" onclick="deleteTag(event)">Delete</button>
+                    </li>
+                </th:block>
+            </ul>
+            <!-- Add New Tags -->
+            <div>
+                <input type="text" id="newTag" placeholder="Add a new tag">
+                <button type="button" onclick="addNewTag()">Add Tag</button>
+            </div>
+
+            <!-- Hidden Input Field for Tags -->
+            <input type="hidden" id="inputTags">
+
+
+
+            <!--            <div>-->
+            <!--                <input type="text" id="tag">-->
+            <!--                <button type="button" onclick="addTag(event)">Add Tag</button>-->
+            <!--                <ul id="tagList"></ul>-->
+            <!--                <input type="hidden" id="inputTags" th:value="${inputTags}" name="inputTags">-->
+
+            <!--            </div>-->
+
+
+            <div>
+                <input type="datetime-local" th:field="*{published_at}" th:value="${retreivedPost.published_at}" placeholder="Published_at" required/>
+            </div>
+            <div id="is-published-section">
+                <input type="checkbox" th:field="*{is_Published}" th:value="${retreivedPost.is_Published}" id="published">
+                <label >Is Published ?</label>
+            </div>
+
+
+
+
+
+            <button type="submit" >Create Post</button>
+
+
+        </form>
+    </main>
+
+
+    <script src="/js/updateTags/UpdateTags.js"></script>
 </body>
 </html>

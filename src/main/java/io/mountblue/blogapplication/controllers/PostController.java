@@ -1,12 +1,17 @@
 package io.mountblue.blogapplication.controllers;
 
 import io.mountblue.blogapplication.entities.Post;
+import io.mountblue.blogapplication.entities.Tag;
 import io.mountblue.blogapplication.repositories.PostRepository;
+import io.mountblue.blogapplication.services.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +20,10 @@ public class PostController {
 
     @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    private TagService tagService;
+
 
     @GetMapping("/posts")
     public String listPosts(Model model) {
@@ -29,6 +38,7 @@ public class PostController {
     // get post by id;
     @GetMapping("/posts/{Id}")
     public String retreivedPostById(@PathVariable Long Id, Model model) {
+
         Optional<Post> retrievedPostById = postRepository.findById(Id);
 
         if (retrievedPostById.isPresent()) {
@@ -41,6 +51,8 @@ public class PostController {
             System.out.println(post.getAuthor());
             System.out.println(post.getExcerpt());
 
+            List<Tag> tags = tagService.getTagsForPost(Id);
+            model.addAttribute("tags", tags);
 
             return "Posts/Post";
         }
@@ -56,6 +68,15 @@ public class PostController {
         if (retrievedPostById.isPresent()) {
             Post retreivedPost = retrievedPostById.get();
             model.addAttribute("retreivedPost", retreivedPost);
+
+            List<Tag> inputTags = tagService.getTagsForPost(Id);
+            model.addAttribute("inputTags", inputTags);
+
+            System.out.println("Existing tags list : ");
+            for(Tag tag : inputTags) {
+                System.out.println(tag.getId() + " " + tag.getName() + " " + tag.getCreated_at() + " " + tag.getUpdated_at() + " " + tag.getPostId());
+            }
+
 
             System.out.println("retreived post :- ");
             System.out.println(retreivedPost.getId());
@@ -96,15 +117,24 @@ public class PostController {
     @GetMapping("/posts/new")
     public String createPost(Model model) {
         model.addAttribute("inputPost", new Post());
+        String inputTags = "";
+        model.addAttribute("inputTags", inputTags);
+
         return "Posts/CreatePost";
     }
 
+    // process create-post request
+
     @PostMapping("/posts/new")
-    public String processCreatePost(@ModelAttribute("inputPost") Post inputPost, Model model) {
+    public String processCreatePost(@ModelAttribute("inputPost") Post inputPost, @ModelAttribute("inputTags") String inputTags, RedirectAttributes redirectAttributes, Model model) {
 
-        postRepository.save(inputPost);
+        Post savedPost =  postRepository.save(inputPost);
+        System.out.println("inputTags value : " + inputTags);
+        System.out.println("postId in post Controller : " + savedPost.getId());
 
-        return "redirect:/posts";
+        redirectAttributes.addFlashAttribute("inputTags", inputTags); // Add inputags as flash attribute
+        redirectAttributes.addFlashAttribute("postId", savedPost.getId());
+        return "redirect:/posts/tags/new";
     }
 
 
