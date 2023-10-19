@@ -106,13 +106,11 @@ public class CommentController {
     }
     // delete a post by id
     @GetMapping("/posts/{postId}/comments/delete/{commentId}")
-    public String deletePostById(@PathVariable("commentId") Long Id) {
+    public String deletePostById(@PathVariable("commentId") Long Id, @PathVariable("postId") Long postId) {
 
         commentRepository.deleteById(Id);
 
-        return "redirect:/posts";
+        return "redirect:/posts/"+postId+"/comments";
     }
-
-
 
 }
