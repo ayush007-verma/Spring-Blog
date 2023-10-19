@@ -7,7 +7,13 @@ function addNewTag() {
     if (newTag !== '') {
         var existingTagsList = document.getElementById('existingTags');
         var newTagItem = document.createElement('li');
-        newTagItem.innerText = newTag;
+
+        // Create a new span element
+        var tagNameSpan = document.createElement('span');
+        tagNameSpan.innerText = newTag;
+
+        // Append the span to the li element
+        newTagItem.appendChild(tagNameSpan);
 
         var updateButton = document.createElement('button');
         updateButton.type = 'button';
@@ -33,7 +39,7 @@ function addNewTag() {
 
 // Function to update hidden input with all tags
 function updateHiddenInput() {
-    var tagItems = document.querySelectorAll('#existingTags li');
+    var tagItems = document.querySelectorAll('#existingTags li span');
     var tagsArray = Array.from(tagItems).map(item => item.innerText);
 
     var inputTags = document.getElementById('inputTags');

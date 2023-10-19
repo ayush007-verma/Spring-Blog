@@ -39,16 +39,19 @@
             <!-- Existing Tags -->
             <h3>Existing Tags:</h3>
             <ul id="existingTags">
-                <!-- Iterate through the list of existing tags -->
-                <th:block th:each="tag : ${inputTags}">
-                    <li>
-                        <span th:text="${tag.name}"></span>
-                        <!-- Buttons for update and delete -->
-                        <button type="button" onclick="updateTag(event)">Update</button>
-                        <button type="button" onclick="deleteTag(event)">Delete</button>
-                    </li>
+                <th:block th:with="tagsList=${#strings.arraySplit(inputTags, ',')}">
+                    <!-- Iterate through the list of existing tags -->
+                    <th:block th:each="tag : ${tagsList}">
+                        <li>
+                            <span th:text="${tag}"></span>
+                            <!-- Buttons for update and delete -->
+                            <button type="button" onclick="updateTag(event)">Update</button>
+                            <button type="button" onclick="deleteTag(event)">Delete</button>
+                        </li>
+                    </th:block>
                 </th:block>
             </ul>
+
             <!-- Add New Tags -->
             <div>
                 <input type="text" id="newTag" placeholder="Add a new tag">
@@ -56,18 +59,7 @@
             </div>
 
             <!-- Hidden Input Field for Tags -->
-            <input type="hidden" id="inputTags">
-
-
-
-            <!--            <div>-->
-            <!--                <input type="text" id="tag">-->
-            <!--                <button type="button" onclick="addTag(event)">Add Tag</button>-->
-            <!--                <ul id="tagList"></ul>-->
-            <!--                <input type="hidden" id="inputTags" th:value="${inputTags}" name="inputTags">-->
-
-            <!--            </div>-->
-
+            <input name="inputTags" id="inputTags" th:value="${inputTags}">
 
             <div>
                 <input type="datetime-local" th:field="*{published_at}" th:value="${retreivedPost.published_at}" placeholder="Published_at" required/>

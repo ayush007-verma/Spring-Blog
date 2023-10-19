@@ -12,9 +12,8 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
+    @Column(unique = true)
     private String name;
-
-    private Long postId;
 
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
@@ -55,13 +54,5 @@ public class Tag {
 
     public void setUpdated_at(Date updated_at) {
         this.updated_at = updated_at;
-    }
-
-    public Long getPostId() {
-        return postId;
-    }
-
-    public void setPostId(Long postId) {
-        this.postId = postId;
     }
 }
