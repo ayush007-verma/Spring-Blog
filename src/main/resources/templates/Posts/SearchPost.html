@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Search Post</title>
+
+  <link rel="stylesheet" href="/Post/Posts.css"/>
+  <link rel="stylesheet" href="/Post/SearchPost.css"/>
+</head>
+<body>
+<header>
+  <h1>My Blog Application</h1>
+  <div class="nav-link">
+    <a th:href="@{'/posts/new'}"><button id="nav-link">Click to Write a new Blog....</button></a>
+  </div>
+  <nav>
+    <div class="nav-options">
+      <button> Search </button>
+      <a> <h2> Login </h2></a>
+    </div>
+<!--    <div class="nav-options">-->
+<!--      <button> Filter </button>-->
+<!--      <button> Sort </button>-->
+<!--    </div>-->
+<!--    -->
+
+    <div class="nav-options">
+      <button onclick="showOptions('filter')">Filter</button>
+      <button onclick="showOptions('sort')">Sort</button>
+    </div>
+
+    <div class="options" id="filterOptions">
+      <button onclick="callController('filterOption1')">Filter Option 1</button>
+      <button onclick="callController('filterOption2')">Filter Option 2</button>
+      <!-- Add more filter options as needed -->
+    </div>
+
+    <div class="options" id="sortOptions">
+      <form th:action="@{/posts/search/sort}" method="POST" onsubmit="updateSortQuery()">
+        <input type="hidden" id="sortQuery" name="sortQuery" th:value="${sortQuery}">
+        <label>
+          <input type="radio" name="sortOption" value="Id"> Id
+        </label><br>
+        <label>
+          <input type="radio" name="sortOption" value="title"> Title
+        </label><br>
+        <label>
+          <input type="radio" name="sortOption" value="author"> Author
+        </label><br>
+        <label>
+          <input type="radio" name="sortOption" value="published_at"> Published_At
+        </label><br>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+
+  </nav>
+</header>
+
+<main>
+
+<!--  <form th:action="@{/posts/search}" method="POST">-->
+<!--    <input type="text" th:field="${query}"  placeholder="Search...">-->
+<!--    <input type="submit"></input>-->
+<!--  </form>-->
+
+  <h2 th:text="${query1}"></h2>
+
+    <form th:action="@{/posts/search}" method="POST">
+
+      <input type="text" th:name="'query1'"  th:value="${query1}">
+      <input type="submit"></input>
+
+    </form>
+
+
+
+
+  <th:block th:each="post : ${posts}">
+    <div class="post" >
+      <div class="title">
+        <h5 th:text="${post.title}"></h5>
+      </div>
+      <div class="author-info">
+        <p  th:text="${post.author}"></p>
+        &nbsp;
+        <p th:text="${'Published At: ' + #dates.format(post.published_at, 'yyyy-MM-dd HH:mm')}"></p>
+      </div>
+      <div class="post-excerpt">
+        <p  th:text="${post.excerpt}"></p>
+      </div>
+      <a th:href="@{'/posts/' + ${post.id}}"> Read More </a>
+    </div>
+  </th:block>
+
+</main>
+
+<!--    <footer>-->
+<!--        <a><h3>< Previous</h3></a>-->
+
+
+
+<!--        <a><h3>Next ></h3></a>-->
+
+<!--    </footer>-->
+
+<!-- Footer with Pagination Controls and Previous/Next links -->
+<footer>
+  <!-- Pagination Controls -->
+  <ul class="pagination">
+    <li th:if="${currentPage > 1}">
+      <a th:href="@{/posts(page=${currentPage - 1})}">Previous</a>
+    </li>
+    <li th:each="pageNo : ${#numbers.sequence(1, totalPages)}">
+      <a th:href="@{/posts(page=${pageNo})}" th:text="${pageNo}" th:class="${pageNo == currentPage} ? 'active' : ''"></a>
+    </li>
+    <li th:if="${currentPage < totalPages}">
+      <a th:href="@{/posts(page=${currentPage + 1})}">Next</a>
+    </li>
+  </ul>
+
+  <!-- Previous and Next links -->
+  <a th:if="${currentPage > 1}" th:href="@{/posts(page=${currentPage - 1})}">
+    <h3>< Previous</h3>
+  </a>
+  <a th:if="${currentPage < totalPages}" th:href="@{/posts(page=${currentPage + 1})}">
+    <h3>Next ></h3>
+  </a>
+</footer>
+
+
+
+<script src="/js/SearchPost/FilterPost.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+.options {
+    display : none;
+}
+
+header  {
+    height: 50vh !important;
+    /*z-index : 5;*/
+}

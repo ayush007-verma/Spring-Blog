@@ -7,6 +7,7 @@ import io.mountblue.blogapplication.repositories.PostRepository;
 import io.mountblue.blogapplication.repositories.TagRepository;
 import io.mountblue.blogapplication.services.PostTagService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
 
 @Controller
 public class PostController {
@@ -30,15 +32,28 @@ public class PostController {
     private TagRepository tagRepository;
 
 
-    @GetMapping("/posts")
-    public String listPosts(Model model) {
+//    @GetMapping("/posts")
+//    public String listPosts(Model model, @RequestParam(defaultValue = "1") int page) {
+//        int pageSize = 6;
+//
+//        List<Post> posts = postRepository.findAll();
+//        model.addAttribute("posts", posts);
+//
+//        return "Posts/Posts";
+//    }
 
-        List<Post> posts = postRepository.findAll();
+    @GetMapping("/posts")
+    public String listPosts(Model model, Pageable pageable) {
+        pageable = PageRequest.of(pageable.getPageNumber(), 6);
+        Page<Post> postPage = postRepository.findAll(pageable);
+        List<Post> posts = postPage.getContent();
+
         model.addAttribute("posts", posts);
+        model.addAttribute("currentPage", postPage.getNumber() + 1);
+        model.addAttribute("totalPages", postPage.getTotalPages());
 
         return "Posts/Posts";
     }
-
 
     // get post by id;
     @GetMapping("/posts/{Id}")
@@ -176,6 +191,66 @@ public class PostController {
     }
 
 
+    // search a post
 
+    @GetMapping("/posts/search")
+    public String searchPost( Model model, Pageable pageable) {
+
+        pageable = PageRequest.of(pageable.getPageNumber(), 6);
+
+        List<Post> posts = new ArrayList<>();
+
+        Page<Post> postPage = new PageImpl<>(posts, pageable, 0);
+
+        model.addAttribute("posts", posts);
+        model.addAttribute("query1", "X");
+        model.addAttribute("sortQuery", "");
+
+        model.addAttribute("currentPage", postPage.getNumber() + 1);
+        model.addAttribute("totalPages", postPage.getTotalPages());
+        return "Posts/SearchPost";
+    }
+
+    @PostMapping("/posts/search")
+    public String processSearchPost(@ModelAttribute("query1") String query, Model model, Pageable pageable) {
+        pageable = PageRequest.of(pageable.getPageNumber(), 6);
+        System.out.println("Qyert :-> '" + query + "'(");
+
+        Page<Post> postPage = postRepository.searchPosts(query, pageable);
+
+        List<Post> posts = postPage.getContent();
+        System.out.println(posts.size());
+        model.addAttribute("posts", posts);
+        model.addAttribute("currentPage", postPage.getNumber() + 1);
+        model.addAttribute("totalPages", postPage.getTotalPages());
+
+        return "Posts/SearchPost";
+    }
+
+    @PostMapping("/posts/search/sort")
+    public String sortListPosts(@ModelAttribute("sortQuery") String sortQuery, @ModelAttribute("query1") String searchQuery, Model model, Pageable pageable) {
+        System.out.println("**********************");
+        searchQuery = "ML";
+
+        System.out.println("search Query :-> '" + searchQuery + "'");
+        System.out.println("sortQuery :-> '" + sortQuery + "'(");
+        String orderQuery = "DESC";
+        String filterName = "author";
+        String filterValue = "Ross";
+
+        pageable = PageRequest.of(pageable.getPageNumber(), 6, orderQuery.equals("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC, sortQuery);
+
+        Page<Post> postPage = postRepository.searchAndFilterPosts(searchQuery, filterName, filterValue, pageable);
+        System.out.println(postPage);
+        List<Post> posts = postPage.getContent();
+
+        System.out.println(posts.size());
+        model.addAttribute("posts", posts);
+        model.addAttribute("currentPage", postPage.getNumber() + 1);
+        model   .addAttribute("totalPages", postPage.getTotalPages());
+
+
+        return "Posts/SearchPost";
+    }
 
 }

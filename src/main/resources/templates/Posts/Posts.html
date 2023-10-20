@@ -15,7 +15,7 @@
         </div>
         <nav>
             <div class="nav-options">
-                <button> Search </button>
+                <a th:href="@{'/posts/search'}"><button> Search </button></a>
                 <a> <h2> Login </h2></a>
             </div>
             <div class="nav-options">
@@ -45,13 +45,85 @@
 
     </main>
 
+<!--    <footer>-->
+<!--        <a><h3>< Previous</h3></a>-->
+
+
+
+<!--        <a><h3>Next ></h3></a>-->
+
+<!--    </footer>-->
+
+<!--    &lt;!&ndash; Footer with Pagination Controls and Previous/Next links &ndash;&gt;-->
+<!--    <footer>-->
+<!--        &lt;!&ndash; Pagination Controls &ndash;&gt;-->
+<!--        <ul class="pagination">-->
+<!--            <li th:if="${currentPage > 1}">-->
+<!--                <a th:href="@{/posts(page=${currentPage - 1})}">Previous</a>-->
+<!--            </li>-->
+<!--            <li th:each="pageNo : ${#numbers.sequence(1, totalPages)}">-->
+<!--                <a th:href="@{/posts(page=${pageNo})}" th:text="${pageNo}" th:class="${pageNo == currentPage} ? 'active' : ''"></a>-->
+<!--            </li>-->
+<!--            <li th:if="${currentPage < totalPages}">-->
+<!--                <a th:href="@{/posts(page=${currentPage + 1})}">Next</a>-->
+<!--            </li>-->
+<!--        </ul>-->
+
+<!--        &lt;!&ndash; Previous and Next links &ndash;&gt;-->
+<!--        <a th:if="${currentPage > 1}" th:href="@{/posts(page=${currentPage - 1})}">-->
+<!--            <h3>< Previous</h3>-->
+<!--        </a>-->
+<!--        <a th:if="${currentPage < totalPages}" th:href="@{/posts(page=${currentPage + 1})}">-->
+<!--            <h3>Next ></h3>-->
+<!--        </a>-->
+<!--    </footer>-->
+
+    <!-- Footer with Pagination Controls and Previous/Next links -->
     <footer>
-        <a><h3>< Previous</h3></a>
+<!--        &lt;!&ndash; Pagination Controls &ndash;&gt;-->
+<!--        <ul class="pagination">-->
+<!--            <li th:if="${totalPages != null && currentPage > 1}">-->
+<!--                <a th:href="@{/posts(page=${currentPage - 1})}">Previous</a>-->
+<!--            </li>-->
+<!--            <li th:if="${totalPages != null}" th:each="pageNo : ${#numbers.sequence(1, totalPages)}">-->
+<!--                <a th:href="@{/posts(page=${pageNo})}" th:text="${pageNo}" th:class="${pageNo == currentPage} ? 'active' : ''"></a>-->
+<!--            </li>-->
+<!--            <li th:if="${totalPages != null && currentPage < totalPages}">-->
+<!--                <a th:href="@{/posts(page=${currentPage + 1})}">Next</a>-->
+<!--            </li>-->
+<!--        </ul>-->
 
+<!--        &lt;!&ndash; Previous and Next links &ndash;&gt;-->
+<!--        <a th:if="${totalPages != null && currentPage > 1}" th:href="@{/posts(page=${currentPage - 1})}">-->
+<!--            <h3>< Previous</h3>-->
+<!--        </a>-->
+<!--        <a th:if="${totalPages != null && currentPage < totalPages}" th:href="@{/posts(page=${currentPage + 1})}">-->
+<!--            <h3>Next ></h3>-->
+<!--        </a>-->
 
+        <!-- Pagination Controls -->
+        <ul class="pagination">
+            <li th:if="${totalPages != null && currentPage > 1}">
+                <a th:href="@{/posts(page=${currentPage - 1})}">Previous</a>
+            </li>
+            <li th:each="pageNo : ${#numbers.sequence(1, totalPages != null ? totalPages : 1)}">
+                <a th:href="@{/posts(page=${pageNo})}" th:text="${pageNo}" th:class="${pageNo == currentPage} ? 'active' : ''"></a>
+            </li>
+            <li th:if="${totalPages != null && currentPage < totalPages}">
+                <a th:href="@{/posts(page=${currentPage + 1})}">Next</a>
+            </li>
+        </ul>
 
-        <a><h3>Next ></h3></a>
+        <!-- Previous and Next links -->
+        <a th:if="${totalPages != null && currentPage > 1}" th:href="@{/posts(page=${currentPage - 1})}">
+            <h3>< Previous</h3>
+        </a>
+        <a th:if="${totalPages != null && currentPage < totalPages}" th:href="@{/posts(page=${currentPage + 1})}">
+            <h3>Next ></h3>
+        </a>
+
     </footer>
+
 
 
 
