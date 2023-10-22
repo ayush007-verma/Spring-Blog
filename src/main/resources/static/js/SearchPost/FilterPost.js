@@ -25,3 +25,14 @@ function updateSortQuery() {
 
 
 }
+
+
+function updateFilterQuery() {
+    var selectedOption = document.querySelector('input[name="filterOption"]:checked').value;
+    console.log("selected Option : ", selectedOption)
+    console.log("initial filterQuery = " , document.getElementById('filterQuery').value)
+    document.getElementById('filterQuery').value = selectedOption;
+    console.log("after click filterQuery = " , document.getElementById('filterQuery').value)
+
+
+}
