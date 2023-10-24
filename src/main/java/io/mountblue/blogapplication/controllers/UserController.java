@@ -42,6 +42,7 @@ public class UserController {
             newUsers.setPassword(passwordEncoder.encode(newUsers.getPassword()));
             newUsers.setRole("USER");
             userRepository.save(newUsers);
+
             message = "User Saved Successfully";
         } else {
             message = "User Save Failed";
