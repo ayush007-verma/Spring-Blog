@@ -18,8 +18,8 @@
 
             <div class="nav-options">
                 <a th:href="@{'/posts/search'}"><button> Search </button></a>
-
-                <a> <h2> <h4 th:text="${loggedInUser}"> </h4> </h2></a>
+                <div th:if=" ${loggedInUser} != '' "> <h1> <span th:text="${loggedInUser}"></span> </h1></div>
+                <div th:if=" ${loggedInUser} == '' "> <h1> Pls Log In.... </h1></div>
 
             </div>
             <div class="nav-options">
