@@ -3,10 +3,10 @@ function showOptions(type) {
     const sortOptions = document.getElementById('sortOptions');
 
     if (type === 'filter') {
-        filterOptions.style.display = 'block';
+        filterOptions.style.display = 'flex';
         sortOptions.style.display = 'none';
     } else if (type === 'sort') {
-        sortOptions.style.display = 'block';
+        sortOptions.style.display = 'flex';
         filterOptions.style.display = 'none';
     }
 }

@@ -34,41 +34,55 @@
       <form th:action="@{/posts/search/filter}" method="POST" onsubmit="updateFilterQuery()">
         <h4> Select the filter </h4>
         <input type="hidden" id="filterQuery" name="filterQuery" th:value="${filterQuery}">
-        <label>
-          <input type="radio" name="filterOption" value="Id"> Id
-        </label><br>
-        <label>
-          <input type="radio" name="filterOption" value="title"> Title
-        </label><br>
-        <label>
-          <input type="radio" name="filterOption" value="author"> Author
-        </label><br>
-        <label>
-          <input type="radio" name="filterOption" value="tags"> Published_At
-        </label><br>
+        <div class="option">
+          <label> Id </label>
+          <input type="radio" class="option-input" name="filterOption" value="Id">
+        </div>
+        <div class="option">
+          <label> Title </label>
+          <input type="radio" class="option-input" name="filterOption" value="title">
+        </div>
+        <div class="option">
+          <label> Author </label><br>
+          <input type="radio" class="option-input" name="filterOption" value="author">
+        </div>
+        <div class="option">
+          <label> Published_At </label><br>
+          <input type="radio" class="option-input" name="filterOption" value="tags">
+        </div>
 
-        <input type="text" th:name="'filterValue'"  th:value="${filterValue}" placeholder="Enter Filter....">
-        <input type="submit" value="Submit">
+        <input class="option-input" type="text" th:name="'filterValue'"  th:value="${filterValue}" placeholder="Enter Filter....">
+        <input class="option-input" type="submit" value="Filter">
+
       </form>
     </div>
 
     <div class="options" id="sortOptions">
       <form th:action="@{/posts/search/sort}" method="POST" onsubmit="updateSortQuery()">
-<!--        search query : <h1 th:text="${query1}">  </h1>-->
+        <h4> Select the sort option </h4>
+
         <input type="hidden" id="sortQuery" name="sortQuery" th:value="${sortQuery}">
-        <label>
-          <input type="radio" name="sortOption" value="Id"> Id
-        </label><br>
-        <label>
-          <input type="radio" name="sortOption" value="title"> Title
-        </label><br>
-        <label>
-          <input type="radio" name="sortOption" value="author"> Author
-        </label><br>
-        <label>
-          <input type="radio" name="sortOption" value="published_at"> Published_At
-        </label><br>
-        <input type="submit" value="Submit">
+        <div class="option">
+          <label> Id </label>
+          <input type="radio" class="option-input" name="sortOption" value="Id">
+        </div>
+        <br>
+        <div class="option">
+          <label> Title </label>
+          <input type="radio" class="option-input" name="sortOption" value="title">
+        </div>
+        <br>
+        <div class="option">
+          <label> Author </label>
+          <input type="radio" class="option-input" name="sortOption" value="author">
+        </div>
+        <br>
+        <div class="option">
+          <label> PublishedAt </label>
+          <input type="radio" class="option-input" name="sortOption" value="published_at">
+        </div>
+        <br/>
+        <input class="option-input" type="submit" value="Sort">
       </form>
     </div>
 

@@ -3,6 +3,33 @@
 }
 
 header  {
-    height: 50vh !important;
+    /*height: 50vh !important;*/
     /*z-index : 5;*/
 }
+
+#filterOptions , #sortOptions{
+    z-index: 10;
+    background: white;
+    border: solid black;
+
+    /*display: flex;*/
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width : 20vw;
+}
+
+
+.option-input{
+    height: 3vh !important;
+    margin: 10px;
+}
+
+.option {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /*align-items: center;*/
+}
+
