@@ -17,11 +17,13 @@
         <nav>
 
 
-            <div class="nav-options">
+            <div class="nav-options login-logout">
                 <a th:href="@{'/posts/search'}"><button> Search </button></a>
-                <div th:if=" ${loggedInUser} != '' "> <h1> <span th:text="${loggedInUser}"></span> </h1></div>
 
-                <a th:href="@{'/login'}"><div th:if=" ${loggedInUser} == '' "> <h1>  Log in </h1></div></a>
+                <a th:if=" ${loggedInUser} != '' "> <button> <span th:text="${loggedInUser}"></span> </button></a>
+<!--                <a th:href="@{'/login'}"><div th:if=" ${loggedInUser} == '' "> <h1>  Log in </h1></div></a>-->
+
+                <a th:href="@{'/logout'}"><button> Logout </button></a>
 
             </div>
             <div class="nav-options">

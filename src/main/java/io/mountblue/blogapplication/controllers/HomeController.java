@@ -18,7 +18,8 @@ public class HomeController {
 
     @GetMapping("/")
     public String homeHandler() {
-        return "Home";
+
+        return  "redirect:/posts";
     }
 
 
