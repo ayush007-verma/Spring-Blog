@@ -23,7 +23,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests(configurer ->
                         configurer
                                 .requestMatchers("/posts").authenticated()
-                                .requestMatchers("/posts/new").hasRole("ADMIN")
                                 .anyRequest().permitAll()
                         )
                 .formLogin(form ->

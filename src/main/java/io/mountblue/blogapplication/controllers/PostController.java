@@ -202,93 +202,141 @@ public class PostController {
 
     // search a post
 
+//    @GetMapping("/posts/search")
+//    public String searchPost( Model model, Pageable pageable) {
+//
+//        pageable = PageRequest.of(pageable.getPageNumber(), 6);
+//
+//        List<Post> posts = new ArrayList<>();
+//
+//        Page<Post> postPage = new PageImpl<>(posts, pageable, 0);
+//
+//        model.addAttribute("posts", posts);
+//        model.addAttribute("query1", "X");
+//        model.addAttribute("sortQuery", "");
+//        model.addAttribute("filterQuery", "");
+//        model.addAttribute("filterValue", "");
+//
+//        model.addAttribute("currentPage", postPage.getNumber() + 1);
+//        model.addAttribute("totalPages", postPage.getTotalPages());
+//        return "Posts/SearchPost";
+//    }
+
+//    @PostMapping("/posts/search")
+//    public String processSearchPost(@ModelAttribute("query1") String query, Model model, Pageable pageable) {
+//        pageable = PageRequest.of(pageable.getPageNumber(), 6);
+//        System.out.println("Qyert :-> '" + query + "'(");
+//
+//        Page<Post> postPage = postRepository.searchPosts(query, pageable);
+//
+//        List<Post> posts = postPage.getContent();
+//        System.out.println(posts.size());
+//        model.addAttribute("posts", posts);
+//        model.addAttribute("currentPage", postPage.getNumber() + 1);
+//        model.addAttribute("totalPages", postPage.getTotalPages());
+//
+//        model.addAttribute("searchQuery", query);
+//        return "Posts/SearchPost";
+//    }
+//
+//    @PostMapping("/posts/search/sort")
+//    public String sortListPosts(@ModelAttribute("sortQuery") String sortQuery, @ModelAttribute("query1") String searchQuery, @ModelAttribute("filterQuery") String filterName, @ModelAttribute("filterValue") String filterValue, Model model, Pageable pageable) {
+//        System.out.println("**********************");
+////        searchQuery = "ML";
+//
+//        System.out.println("search Query :-> '" + searchQuery + "'");
+//        System.out.println("sortQuery :-> '" + sortQuery + "'(");
+//        System.out.println("filterName :-> '" + filterName + "'(");
+//        System.out.println("filterValue :-> '" + filterValue + "'(");
+//
+//        String orderQuery = "ASC";
+////        String filterName = "author";
+////        String filterValue = "Ryan";
+//
+//        pageable = PageRequest.of(pageable.getPageNumber(), 6, orderQuery.equals("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC, sortQuery);
+//
+//        Page<Post> postPage = postRepository.searchPosts(searchQuery, pageable);
+////        Page<Post> postPage = postRepository.searchAndFilterPosts(searchQuery, filterName, filterValue, pageable);
+//        System.out.println(postPage);
+//        List<Post> posts = postPage.getContent();
+//
+//        System.out.println(posts.size());
+//        model.addAttribute("posts", posts);
+//        model.addAttribute("currentPage", postPage.getNumber() + 1);
+//        model   .addAttribute("totalPages", postPage.getTotalPages());
+//
+//
+//        return "Posts/SearchPost";
+//    }
+
+
+//    @PostMapping("/posts/search")
+//    public String filterListPosts(@ModelAttribute("filterQuery") String filterName, @ModelAttribute("filterValue") String filterValue, @ModelAttribute("sortQuery") String sortQuery, @ModelAttribute("query1") String searchQuery ,Model model, Pageable pageable) {
+//        System.out.println("**********************");
+////        searchQuery = "ML";
+////        String sortQuery = "Id";
+////        searchQuery = "Ryan";
+//        System.out.println("search Query :-> '" + searchQuery + "'");
+//        System.out.println("sortQuery :-> '" + sortQuery + "'(");
+//        System.out.println("filterName :-> '" + filterName + "'(");
+//        System.out.println("filterValue :-> '" + filterValue + "'(");
+//
+//        String orderQuery = "ASC";
+////        String filterName = "author";
+////        String filterValue = "Ryan";
+//
+//        pageable = PageRequest.of(pageable.getPageNumber(), 6);//, orderQuery.equals("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC, sortQuery);
+//
+//        Page<Post> postPage = postRepository.searchAndFilterPosts(searchQuery, filterName, filterValue, pageable);
+////        Page<Post> postPage = postRepository.searchPosts(searchQuery, pageable);
+//
+//        System.out.println(postPage);
+//        List<Post> posts = postPage.getContent();
+//
+//        System.out.println(posts.size());
+//        model.addAttribute("posts", posts);
+//        model.addAttribute("currentPage", postPage.getNumber() + 1);
+//        model   .addAttribute("totalPages", postPage.getTotalPages());
+//
+//
+//        return "Posts/SearchPost";
+//    }
+//
+//
+
+//    New approach Searching Sorting Filtering Together ....
+
+
     @GetMapping("/posts/search")
-    public String searchPost( Model model, Pageable pageable) {
+    public String searchPost(Model model) {
 
-        pageable = PageRequest.of(pageable.getPageNumber(), 6);
+        System.out.print("render /search");
 
-        List<Post> posts = new ArrayList<>();
-
-        Page<Post> postPage = new PageImpl<>(posts, pageable, 0);
-
-        model.addAttribute("posts", posts);
-        model.addAttribute("query1", "X");
+        model.addAttribute("searchQuery", "");
         model.addAttribute("sortQuery", "");
         model.addAttribute("filterQuery", "");
-        model.addAttribute("filterValue", "");
+        model.addAttribute("filterQueryValue", "");
+        model.addAttribute("orderQuery", "");
 
-        model.addAttribute("currentPage", postPage.getNumber() + 1);
-        model.addAttribute("totalPages", postPage.getTotalPages());
-        return "Posts/SearchPost";
+
+        return "Posts/Search";
     }
 
     @PostMapping("/posts/search")
-    public String processSearchPost(@ModelAttribute("query1") String query, Model model, Pageable pageable) {
-        pageable = PageRequest.of(pageable.getPageNumber(), 6);
-        System.out.println("Qyert :-> '" + query + "'(");
+    public String processSearchPost(Model model, Pageable pageable, @RequestParam("searchQuery") String searchQuery ,@RequestParam("sortQuery") String sortQuery, @RequestParam("filterQuery") String filterQuery, @RequestParam("filterQueryValue") String filterQueryValue, @RequestParam("orderQuery") String orderQuery ){
 
-        Page<Post> postPage = postRepository.searchPosts(query, pageable);
+        System.out.println("\n inside action post mapping :-> " + searchQuery + " " + sortQuery + " " + filterQuery + " " + filterQueryValue + " " + orderQuery);
 
-        List<Post> posts = postPage.getContent();
-        System.out.println(posts.size());
-        model.addAttribute("posts", posts);
-        model.addAttribute("currentPage", postPage.getNumber() + 1);
-        model.addAttribute("totalPages", postPage.getTotalPages());
+        model.addAttribute("searchQuery", searchQuery);
+        model.addAttribute("sortQuery", sortQuery);
+        model.addAttribute("filterQuery", filterQuery);
+        model.addAttribute("filterQueryValue", filterQueryValue);
+        model.addAttribute("orderQuery", orderQuery);
 
-        model.addAttribute("searchQuery", query);
-        return "Posts/SearchPost";
-    }
-
-    @PostMapping("/posts/search/sort")
-    public String sortListPosts(@ModelAttribute("sortQuery") String sortQuery, @ModelAttribute("query1") String searchQuery, @ModelAttribute("filterQuery") String filterName, @ModelAttribute("filterValue") String filterValue, Model model, Pageable pageable) {
-        System.out.println("**********************");
-//        searchQuery = "ML";
-
-        System.out.println("search Query :-> '" + searchQuery + "'");
-        System.out.println("sortQuery :-> '" + sortQuery + "'(");
-        System.out.println("filterName :-> '" + filterName + "'(");
-        System.out.println("filterValue :-> '" + filterValue + "'(");
-
-        String orderQuery = "ASC";
-//        String filterName = "author";
-//        String filterValue = "Ryan";
 
         pageable = PageRequest.of(pageable.getPageNumber(), 6, orderQuery.equals("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC, sortQuery);
 
-        Page<Post> postPage = postRepository.searchPosts(searchQuery, pageable);
-//        Page<Post> postPage = postRepository.searchAndFilterPosts(searchQuery, filterName, filterValue, pageable);
-        System.out.println(postPage);
-        List<Post> posts = postPage.getContent();
-
-        System.out.println(posts.size());
-        model.addAttribute("posts", posts);
-        model.addAttribute("currentPage", postPage.getNumber() + 1);
-        model   .addAttribute("totalPages", postPage.getTotalPages());
-
-
-        return "Posts/SearchPost";
-    }
-
-
-    @PostMapping("/posts/search/filter")
-    public String filterListPosts(@ModelAttribute("filterQuery") String filterName, @ModelAttribute("filterValue") String filterValue, @ModelAttribute("sortQuery") String sortQuery, @ModelAttribute("query1") String searchQuery ,Model model, Pageable pageable) {
-        System.out.println("**********************");
-//        searchQuery = "ML";
-//        String sortQuery = "Id";
-//        searchQuery = "Ryan";
-        System.out.println("search Query :-> '" + searchQuery + "'");
-        System.out.println("sortQuery :-> '" + sortQuery + "'(");
-        System.out.println("filterName :-> '" + filterName + "'(");
-        System.out.println("filterValue :-> '" + filterValue + "'(");
-
-        String orderQuery = "ASC";
-//        String filterName = "author";
-//        String filterValue = "Ryan";
-
-        pageable = PageRequest.of(pageable.getPageNumber(), 6);//, orderQuery.equals("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC, sortQuery);
-
-        Page<Post> postPage = postRepository.searchAndFilterPosts(searchQuery, filterName, filterValue, pageable);
-//        Page<Post> postPage = postRepository.searchPosts(searchQuery, pageable);
+        Page<Post> postPage = postRepository.searchAndFilterPosts(searchQuery, filterQuery, filterQueryValue, pageable);
 
         System.out.println(postPage);
         List<Post> posts = postPage.getContent();
@@ -299,9 +347,7 @@ public class PostController {
         model   .addAttribute("totalPages", postPage.getTotalPages());
 
 
-        return "Posts/SearchPost";
+        return "Posts/Search";
     }
-
-
 
 }

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="/Post/Search.css"/>
+
+</head>
+<body>
+
+    <header>
+        <h1>My Blog Application</h1>
+        <div class="nav-link">
+            <a th:href="@{'/posts/new'}"><button id="nav-link">Click to Write a new Blog....</button></a>
+        </div>
+    </header>
+
+
+    <main>
+
+        <form th:action="@{/posts/search}" method="post">
+
+            <span>
+                <input type="text" name="searchQuery" placeholder="Enter To Search..." />
+
+            </span>
+
+            <h3> Sort the results... </h3>
+
+            <div class="options">
+                <label> title </label>
+                <input type="radio" name="sortQuery" value="title" />
+
+                <label> author </label>
+                <input type="radio" name="sortQuery" value="author" />
+
+                <label> published_at </label>
+                <input type="radio" name="sortQuery" value="published_at" />
+
+            </div>
+
+            <h3> Filter the results... </h3>
+
+            <div class="options">
+                <label> title </label>
+                <input type="radio" name="filterQuery" value="title" />
+
+                <label> author </label>
+                <input type="radio" name="filterQuery" value="author" />
+
+                <label> published_at </label>
+                <input type="radio" name="filterQuery" value="tag" />
+
+            </div>
+
+            <h3> Enter the Value to filter....</h3>
+
+            <div class="options">
+                <label> Increasing </label>
+                <input type="radio" name="orderQuery" value="ASC" />
+
+                <label> Decreasing </label>
+                <input type="radio" name="orderQuery" value="DESC" />
+
+            </div>
+
+
+            <div>
+                <input type="text" name="filterQueryValue" placeholder="Enter Value to Filter..." />
+            </div>
+
+
+            <input type="submit" value="Find Posts"/>
+        </form>
+
+
+        <section>
+
+            <th:block th:each="post : ${posts}">
+                <div class="post" >
+                    <div class="title">
+                        <h5 th:text="${post.title}"></h5>
+                    </div>
+                    <div class="author-info">
+                        <p  th:text="${post.author}"></p>
+                        &nbsp;
+                        <p th:text="${'Published At: ' + #dates.format(post.published_at, 'yyyy-MM-dd HH:mm')}"></p>
+                    </div>
+                    <div class="post-excerpt">
+                        <p  th:text="${post.excerpt}"></p>
+                    </div>
+                    <a th:href="@{'/posts/' + ${post.id}}"> Read More </a>
+                </div>
+            </th:block>
+
+
+        </section>
+
+    </main>
+
+
+
+    <footer>
+        <div th:if="${totalPages != null}">
+        <!-- Pagination Controls -->
+            <ul class="pagination">
+                <li th:if="${currentPage > 1}">
+                    <a th:href="@{/posts(page=${currentPage - 1})}">Previous</a>
+                </li>
+                <li th:each="pageNo : ${#numbers.sequence(1, totalPages)}">
+                    <a th:href="@{/posts(page=${pageNo})}" th:text="${pageNo}" th:class="${pageNo == currentPage} ? 'active' : ''"></a>
+                </li>
+                <li th:if="${currentPage < totalPages}">
+                    <a th:href="@{/posts(page=${currentPage + 1})}">Next</a>
+                </li>
+            </ul>
+
+        <!-- Previous and Next links -->
+            <a th:if="${currentPage > 1}" th:href="@{/posts(page=${currentPage - 1})}">
+                <h3>< Previous</h3>
+            </a>
+            <a th:if="${currentPage < totalPages}" th:href="@{/posts(page=${currentPage + 1})}">
+                <h3>Next ></h3>
+            </a>
+        </div>
+    </footer>
+
+
+</body>
+</html>

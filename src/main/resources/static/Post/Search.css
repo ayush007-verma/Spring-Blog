@@ -1,0 +1,163 @@
+
+/************************************************/
+
+header {
+    height: 15vh;
+    width : 100%;
+    display : flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+
+h1{
+    height  :100%;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-options{
+    height: 50%;
+    width: 100%;
+
+    display : flex;
+    /*flex-direction: row;*/
+    /*align-items: center;*/
+    justify-content: space-around;
+}
+
+.nav-link {
+    display : flex;
+    width : 40vw;
+    justify-content: space-around;
+}
+
+button {
+    display: flex;
+    height : 6vh;
+    width : 14vw;
+    font-family : sans-serif;
+    font-size: 1rem;
+    background: white;
+    border : 1px solid black;
+    justify-content: center;
+    align-items: center;
+}
+
+/************************************************/
+
+
+main {
+    /*border : solid black;*/
+
+    display : flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+}
+
+form {
+    margin : 2%;
+    /*border: solid cyan;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form > div {
+    margin : 2vh;
+}
+
+
+textarea {
+    display: flex;
+    height : 10vh;
+    width : 20vw;
+    font-family : sans-serif;
+    font-size: 1rem;
+    border : 1px solid black;
+    padding-left : 10px;
+}
+
+a:hover, button:hover {
+    cursor : pointer;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+    border-width: 2px;
+}
+
+
+
+input::placeholder{
+    color : black;
+}
+
+input {
+    display: flex;
+    height : 5vh;
+    width : 20vw;
+    font-family : sans-serif;
+    font-size: 1rem;
+    border : 1px solid black;
+    padding-left : 10px;
+}
+
+.options {
+    display : flex;
+    /*border : solid orange;*/
+    width : 20vw;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.options > input {
+    height : 2%;
+}
+
+
+/***********************************************************************/
+section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width : 100%;
+
+    align-items: flex-start;
+}
+
+
+
+.post {
+    height: 40vh;
+    width: 30%;
+    max-width: 30%;
+    margin: 1%;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+
+    border: solid black;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    font-size: 1rem;
+}
+
+.title{
+    font-size: 2rem;
+}
+
+.author-info {
+    display: flex;
+    flex-direction: row;
+    font-size: 1rem;
+}
+
