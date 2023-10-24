@@ -3,17 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+
+    <link rel="stylesheet" href="/Post/CreatePost.css"/>
+
 </head>
 <body>
-    Login Form
-    <form th:action="@{/authenticateTheUser}" method="POST">
-        <input type="email" name="username"/>
-        <input type="password" name="password"/>
 
-        <input type="submit" value="submit" />
-    </form>
-    <br/>
-    Not a Registered User? <a th:href="@{'/register'}"> Register </a> then...
+    <main>
+        <h1>Login Form</h1>
+        <form th:action="@{/authenticateTheUser}" method="POST">
+            <div>
+                <input type="email" name="username" placeholder="Enter email..."/>
+            </div>
+
+            <div>
+                <input type="password" name="password" placeholder="Enter password..."/>
+            </div>
+
+            <input type="submit" value="Login" />
+        </form>
+
+        <h2>Not a Registered User? <a th:href="@{'/register'}"> Register </a> then...</h2>
+
+    </main>
 
 </body>
 </html>

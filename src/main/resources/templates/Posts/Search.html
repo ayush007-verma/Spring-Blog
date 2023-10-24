@@ -10,10 +10,21 @@
 <body>
 
     <header>
-        <h1>My Blog Application</h1>
+        <h1> <a th:href="@{'/posts'}">My Blog Application </a></h1>
         <div class="nav-link">
             <a th:href="@{'/posts/new'}"><button id="nav-link">Click to Write a new Blog....</button></a>
         </div>
+        <nav>
+            <div class="nav-options login-logout">
+                <a th:href="@{'/posts/search'}"><button> Search </button></a>
+
+                <a th:if=" ${loggedInUser} != '' "> <button> <span th:text="${loggedInUser}"></span> </button></a>
+                <!--                <a th:href="@{'/login'}"><div th:if=" ${loggedInUser} == '' "> <h1>  Log in </h1></div></a>-->
+
+                <a th:href="@{'/logout'}"><button> Logout </button></a>
+
+            </div>
+        </nav>
     </header>
 
 

@@ -28,7 +28,7 @@ header > h1{
 
 nav{
     display: flex;
-    width : 25%;
+    width : 30%;
     flex-direction: column;
     height: 100%;
 }
@@ -103,7 +103,7 @@ textarea {
     padding-left : 10px;
 }
 
-a:hover, button:hover {
+a:hover, button:hover, input:hover {
     cursor : pointer;
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
     border-width: 2px;

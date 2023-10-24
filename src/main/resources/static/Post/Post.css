@@ -19,7 +19,7 @@ header > h1{
 
 nav{
     display: flex;
-    width : 25%;
+    width : 30%;
     flex-direction: column;
     height: 100%;
 }
