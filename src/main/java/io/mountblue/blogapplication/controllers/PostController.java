@@ -5,6 +5,7 @@ import io.mountblue.blogapplication.entities.PostTag;
 import io.mountblue.blogapplication.entities.Tag;
 import io.mountblue.blogapplication.repositories.PostRepository;
 import io.mountblue.blogapplication.repositories.TagRepository;
+import io.mountblue.blogapplication.repositories.UserRepository;
 import io.mountblue.blogapplication.services.PostTagService;
 
 import jakarta.servlet.http.HttpSession;
@@ -34,6 +35,9 @@ public class PostController {
 
     @Autowired
     private TagRepository tagRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
 
     @GetMapping("/posts")
@@ -87,7 +91,11 @@ public class PostController {
             model.addAttribute("tags", inputTags);
             String loggedInUser = SecurityContextHolder.getContext().getAuthentication().getName();
             model.addAttribute("loggedInUser", loggedInUser);
-
+            String loggedInUsername = userRepository.findByEmail(loggedInUser).getUsername();
+            model.addAttribute("loggedInUsername", userRepository.findByEmail(loggedInUser).getUsername());
+            System.out.println("********************************************");
+            System.out.println( loggedInUser + " ," +  loggedInUsername);
+            System.out.println("********************************************");
 
             return "Posts/Post";
         }

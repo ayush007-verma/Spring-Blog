@@ -107,7 +107,11 @@ a:hover, button:hover {
     border-width: 2px;
 }
 
-footer > a {
+footer > a , footer > span > a {
     text-decoration: none;
     color : black;
+}
+
+footer > span {
+    display: inline-block;
 }
