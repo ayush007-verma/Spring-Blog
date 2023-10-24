@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 public class SecurityConfig {
@@ -29,11 +31,21 @@ public class SecurityConfig {
                                 .loginPage("/login")
                                 .loginProcessingUrl("/authenticateTheUser")
                                 .permitAll()
+                                .successHandler(authenticationSuccessHandler())
                 )
-                .logout(logout -> logout.permitAll())
+                .logout(logout ->
+                        logout
+                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                                .permitAll()
+                )
                 .exceptionHandling(configurer -> configurer.accessDeniedPage("/access-denied"));
 
         return http.build();
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler authenticationSuccessHandler() {
+        return new CustomAuthenticaionSuccessHandler();
     }
 
 }

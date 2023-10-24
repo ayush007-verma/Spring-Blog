@@ -1,5 +1,5 @@
  <!DOCTYPE html>
- <html lang="en" xmlns:th="http://www.thymeleaf.org">
+ <html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -14,9 +14,13 @@
             <a th:href="@{'/posts/new'}"><button id="nav-link">Click to Write a new Blog....</button></a>
         </div>
         <nav>
+
+
             <div class="nav-options">
                 <a th:href="@{'/posts/search'}"><button> Search </button></a>
-                <a> <h2> Login </h2></a>
+
+                <a> <h2> <h4 th:text="${loggedInUser}"> </h4> </h2></a>
+
             </div>
             <div class="nav-options">
                 <button> Filter </button>

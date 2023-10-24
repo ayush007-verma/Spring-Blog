@@ -6,8 +6,12 @@ import io.mountblue.blogapplication.entities.Tag;
 import io.mountblue.blogapplication.repositories.PostRepository;
 import io.mountblue.blogapplication.repositories.TagRepository;
 import io.mountblue.blogapplication.services.PostTagService;
+
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -43,7 +47,7 @@ public class PostController {
 //    }
 
     @GetMapping("/posts")
-    public String listPosts(Model model, Pageable pageable) {
+    public String listPosts(Model model, Pageable pageable, HttpSession session) {
         pageable = PageRequest.of(pageable.getPageNumber(), 6);
         Page<Post> postPage = postRepository.findAll(pageable);
         List<Post> posts = postPage.getContent();
@@ -51,6 +55,9 @@ public class PostController {
         model.addAttribute("posts", posts);
         model.addAttribute("currentPage", postPage.getNumber() + 1);
         model.addAttribute("totalPages", postPage.getTotalPages());
+
+
+        model.addAttribute("loggedInUser", SecurityContextHolder.getContext().getAuthentication().getName());
 
         return "Posts/Posts";
     }
