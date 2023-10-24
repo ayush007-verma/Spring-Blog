@@ -43,9 +43,13 @@
 
     <footer>
         <a th:href="@{'/posts/' + ${inputPost.id} + '/comments'}"><button>Comment</button></a>
-        <a th:href="@{'/posts/delete/' + ${inputPost.id}}"><button>Delete</button></a>
 
-        <a th:href="@{'/posts/update/' + ${inputPost.id}}"><button>Update</button></a>
+        <div th:if="${loggedInUser} == ${inputPost.author}">
+            <a th:href="@{'/posts/delete/' + ${inputPost.id}}"><button>Delete</button></a>
+
+            <a th:href="@{'/posts/update/' + ${inputPost.id}}"><button>Update</button></a>
+        </div>
+
     </footer>
 
 

@@ -36,16 +36,6 @@ public class PostController {
     private TagRepository tagRepository;
 
 
-//    @GetMapping("/posts")
-//    public String listPosts(Model model, @RequestParam(defaultValue = "1") int page) {
-//        int pageSize = 6;
-//
-//        List<Post> posts = postRepository.findAll();
-//        model.addAttribute("posts", posts);
-//
-//        return "Posts/Posts";
-//    }
-
     @GetMapping("/posts")
     public String listPosts(Model model, Pageable pageable, HttpSession session) {
         pageable = PageRequest.of(pageable.getPageNumber(), 6);
@@ -56,8 +46,10 @@ public class PostController {
         model.addAttribute("currentPage", postPage.getNumber() + 1);
         model.addAttribute("totalPages", postPage.getTotalPages());
 
+        String loggedInUser = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        model.addAttribute("loggedInUser", SecurityContextHolder.getContext().getAuthentication().getName());
+
+        model.addAttribute("loggedInUser", loggedInUser);
 
         return "Posts/Posts";
     }
@@ -93,6 +85,8 @@ public class PostController {
             }
 
             model.addAttribute("tags", inputTags);
+            String loggedInUser = SecurityContextHolder.getContext().getAuthentication().getName();
+            model.addAttribute("loggedInUser", loggedInUser);
 
 
             return "Posts/Post";
