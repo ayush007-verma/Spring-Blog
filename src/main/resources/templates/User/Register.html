@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+    <form th:action="@{/register}" method="POST">
+        <input type="email" name="email" placeholder="Username"/>
+        <br/>
+        <input type="password" name="password" placeholder="***********"/>
+        <br/>
+
+        <button> Submit </button>
+
+    </form>
+
+    Already a Registered User? <a th:href="@{'/login'}"> Login </a> then...
+
+</body>
+</html>
