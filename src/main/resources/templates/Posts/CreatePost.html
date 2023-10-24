@@ -30,7 +30,8 @@
                 <input type="text" th:field="*{excerpt}" placeholder="Excerpt" required/>
             </div>
             <div>
-                <input type="text" th:field="*{author}" placeholder="Author"  required/>
+                <input th:value="${loggedInUsername}" readonly>
+<!--                    <span th:text="${loggedInUsername}"></span>-->
             </div>
             <div>
                 <textarea th:field="*{content}" rows="5" placeholder="Content" required></textarea>

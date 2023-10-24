@@ -29,7 +29,7 @@
                 <input type="text" th:field="*{excerpt}" th:value="${retreivedPost.excerpt}" placeholder="Excerpt" required/>
             </div>
             <div>
-                <input type="text" th:field="*{author}" th:value="${retreivedPost.author}" placeholder="Author"  required/>
+                <input type="text" th:field="*{author}" th:value="${retreivedPost.author}" placeholder="Author"  readonly/>
             </div>
             <div>
                 <textarea th:field="*{content}" rows="5" th:value="${retreivedPost.content}" placeholder="Content" required></textarea>

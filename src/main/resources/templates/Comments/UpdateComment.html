@@ -25,10 +25,7 @@
   <h1> Update existing Comment</h1>
   <form action="#" th:action="@{'/posts/'+ ${clickedPostId} + '/comments/update/' + ${commentId} }" th:object="${retreivedComment}" method="POST">
     <div>
-      <input type="text" th:field="*{name}" th:value="${retreivedComment.name}"  required/>
-    </div>
-    <div>
-      <input type="text" th:field="*{email}" th:value="${retreivedComment.email}"  required/>
+      <input type="text" th:value="${retreivedComment.name}"  readonly/>
     </div>
 
     <div>

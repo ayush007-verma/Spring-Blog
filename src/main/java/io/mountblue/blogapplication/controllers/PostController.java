@@ -182,13 +182,23 @@ public class PostController {
         String inputTags = "";
         model.addAttribute("inputTags", inputTags);
 
+        String loggedInUser = SecurityContextHolder.getContext().getAuthentication().getName();
+        model.addAttribute("loggedInUser", loggedInUser);
+        String loggedInUsername = userRepository.findByEmail(loggedInUser).getUsername();
+        model.addAttribute("loggedInUsername", userRepository.findByEmail(loggedInUser).getUsername());
+        System.out.println(loggedInUsername + " " + loggedInUser);
+
+
         return "Posts/CreatePost";
     }
 
     // process create-post request
 
     @PostMapping("/posts/new")
-    public String processCreatePost(@ModelAttribute("inputPost") Post inputPost, @ModelAttribute("inputTags") String inputTags, RedirectAttributes redirectAttributes, Model model) {
+    public String processCreatePost(@ModelAttribute("inputPost") Post inputPost,@ModelAttribute("inputTags") String inputTags, RedirectAttributes redirectAttributes, Model model) {
+        String loggedInUser = SecurityContextHolder.getContext().getAuthentication().getName();
+        String loggedInUsername = userRepository.findByEmail(loggedInUser).getUsername();
+        inputPost.setAuthor(loggedInUsername);
 
         Post savedPost = postRepository.save(inputPost);
         System.out.println("inputTags value : " + inputTags);

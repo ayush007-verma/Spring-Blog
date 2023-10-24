@@ -37,8 +37,12 @@
                 <p th:text="${comment.created_at}"> </p>
 
                 <div class="ud-buttons">
-                    <a th:href="@{'/posts/' + ${postId} + '/comments/delete/' + ${comment.id}}"><button>Delete</button></a>
-                    <a th:href="@{'/posts/' + ${postId} + '/comments/update/' + ${comment.id}}"><button>Update</button></a>
+                    <span th:if="${loggedInUsername} == ${comment.name}">
+                        <a th:href="@{'/posts/' + ${postId} + '/comments/delete/' + ${comment.id}}"><button>Delete</button></a>
+                    </span>
+                    <span th:if="${loggedInUsername} == ${comment.name}">
+                        <a th:href="@{'/posts/' + ${postId} + '/comments/update/' + ${comment.id}}"><button>Update</button></a>
+                    </span>
                 </div>
             </div>
         </th:block>

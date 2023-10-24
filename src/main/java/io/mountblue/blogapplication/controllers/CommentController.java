@@ -4,7 +4,9 @@ package io.mountblue.blogapplication.controllers;
 import io.mountblue.blogapplication.entities.Comment;
 import io.mountblue.blogapplication.entities.Post;
 import io.mountblue.blogapplication.repositories.CommentRepository;
+import io.mountblue.blogapplication.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,9 @@ public class CommentController {
     @Autowired
     private CommentRepository commentRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     // get comments by id
 
 
@@ -38,6 +43,13 @@ public class CommentController {
 
         }
         System.out.println(commentList.size());
+
+        String loggedInUser = SecurityContextHolder.getContext().getAuthentication().getName();
+        model.addAttribute("loggedInUser", loggedInUser);
+        String loggedInUsername = userRepository.findByEmail(loggedInUser).getUsername();
+        model.addAttribute("loggedInUsername", userRepository.findByEmail(loggedInUser).getUsername());
+
+
         return "Comments/CommentsByPostId";
     }
 
@@ -47,11 +59,23 @@ public class CommentController {
         model.addAttribute("inputNewComment", new Comment());
         model.addAttribute("clickedPostId", postId);
 
+        String loggedInUser = SecurityContextHolder.getContext().getAuthentication().getName();
+        model.addAttribute("loggedInUser", loggedInUser);
+        String loggedInUsername = userRepository.findByEmail(loggedInUser).getUsername();
+        model.addAttribute("loggedInUsername", userRepository.findByEmail(loggedInUser).getUsername());
+
+
         return "Comments/CreateComment";
     }
 
     @PostMapping("/posts/{postId}/comments/new")
     public String processComment(@PathVariable("postId") Long postId, @ModelAttribute("inputComment")Comment inputNewComment, Model model) {
+        String loggedInUser = SecurityContextHolder.getContext().getAuthentication().getName();
+        String loggedInUsername = userRepository.findByEmail(loggedInUser).getUsername();
+
+        inputNewComment.setEmail(loggedInUser);
+        inputNewComment.setName(loggedInUsername);
+
         inputNewComment.setPost_id(postId);
         inputNewComment.setCreated_at(new Date());
         inputNewComment.setUpdated_at(new Date());
@@ -92,6 +116,14 @@ public class CommentController {
     public String processUpdateComment(@PathVariable("postId") Long postId, @PathVariable("commentId") Long commentId,@ModelAttribute("retreivedComment") Comment retreivedComment, Model model) {
         retreivedComment.setPost_id(postId);
         retreivedComment.setId(commentId);
+
+        String loggedInUser = SecurityContextHolder.getContext().getAuthentication().getName();
+        String loggedInUsername = userRepository.findByEmail(loggedInUser).getUsername();
+
+
+        retreivedComment.setName(loggedInUsername);
+        retreivedComment.setEmail(loggedInUser);
+
         commentRepository.save(retreivedComment);
         System.out.println("*********************");
         System.out.println("updated  post :- ");

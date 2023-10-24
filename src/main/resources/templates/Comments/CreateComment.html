@@ -25,10 +25,7 @@
     <h1> Write a new Comment</h1>
     <form action="#" th:action="@{'/posts/'+ ${clickedPostId} + '/comments/new'}" th:object="${inputNewComment}" method="POST">
               <div>
-                <input type="text" th:field="*{name}" placeholder="Username" required/>
-              </div>
-              <div>
-                <input type="email" th:field="*{email}" placeholder="Email" required/>
+                <input type="text" th:value="${loggedInUser}" placeholder="Username" readonly/>
               </div>
 
               <div>
