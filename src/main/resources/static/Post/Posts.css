@@ -148,3 +148,10 @@ a:hover, button:hover, input:hover, .post:hover ,.post > a, .post>a:hover {
     justify-content: center;
     align-items: center;
 }
+ul.pagination {
+    width: 20vw;
+/*border: solid black;*/
+    display: flex;
+    justify-content: space-evenly;
+}
+}

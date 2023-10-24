@@ -9,6 +9,7 @@
 </head>
 <body>
     <header>
+
         <h1>My Blog Application</h1>
         <div class="nav-link">
             <a th:href="@{'/posts/new'}"><button id="nav-link">Click to Write a new Blog....</button></a>
@@ -19,12 +20,13 @@
             <div class="nav-options">
                 <a th:href="@{'/posts/search'}"><button> Search </button></a>
                 <div th:if=" ${loggedInUser} != '' "> <h1> <span th:text="${loggedInUser}"></span> </h1></div>
-                <div th:if=" ${loggedInUser} == '' "> <h1> Pls Log In.... </h1></div>
+
+                <a th:href="@{'/login'}"><div th:if=" ${loggedInUser} == '' "> <h1>  Log in </h1></div></a>
 
             </div>
             <div class="nav-options">
-                <button> Filter </button>
-                <button> Sort </button>
+                <a th:href="@{'/posts/search'}"><button> Filter </button></a>
+                <a th:href="@{'/posts/search'}"><button> Sort </button></a>
             </div>
         </nav>
     </header>
